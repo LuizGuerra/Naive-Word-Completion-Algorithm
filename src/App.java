@@ -1,11 +1,13 @@
-public class App {
-    public static void main(String[] args) {
-        ReadCSVFile read_it = new ReadCSVFile();
-        String [][] information = read_it.read();
-        Integer size = read_it.getFile_size();
+import java.util.List;
+import java.util.ArrayList;
 
-        for (int i = 0; i < size; i++) {
-            System.out.println(information[i][0] + "\t\t" + information[i][1]);
+public class App {
+    public static void main(String[] args) throws Exception {
+        ReadCSVFile read_it = new ReadCSVFile();
+        List<List<String>> information = read_it.read();
+
+        for (int i = 0; i < information.size(); i++) {
+            System.out.printf("%S\t\t%S\n", information.get(i).get(0), information.get(i).get(1));
         }
 
     }
