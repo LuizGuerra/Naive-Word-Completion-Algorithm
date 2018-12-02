@@ -15,7 +15,7 @@ public class ReadCSVFile {
     private BufferedReader br;
     //private
 
-    public ReadCSVFile () throws Exception {
+    public ReadCSVFile () {
         // You will have to change the path name in your desktop
         this.path = "src\\nomes.csv";
         this.br = null;

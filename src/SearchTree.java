@@ -1,25 +1,70 @@
-import java.net.Inet4Address;
 import java.util.LinkedList;
+import java.util.List;
 
 public class SearchTree {
+
+    private Node root;
+    private Integer size;
+    private Integer height;
 
     private class Node {
 
         private Node father;
-        private Integer element;
-        private LinkedList subtrees;
+        private String name, value;
+        private List <Node> subtrees;
+        private Integer level;
 
-        Node(Integer e){
+        Node(String n, String v){
             this.father = null;
-            this.element = e;
+            this.name = n;
+            this.value = v;
             this.subtrees = null;
+            this.level = null;
         }
 
-        void addSubtree(Node n) {}
-        boolean removeSubtree(Node n) {return false;}
-        Node getSubtree(int i){return null;}
-        int getSubtreesSize(){return 0;}
+        public void addSubtree(Node n) {
+            this.subtrees.add(n);
+        }
+    }
 
+    public SearchTree () {
+        this.root = null;
+        this.size = 0;
+        this.height = null;
+    }
+
+    // implementar: após encontrar o nodo, adcionar o nome.
+    public boolean add (String name, String meaning) {
+        if (size == 0) {
+            Node node = new Node(name, meaning);
+            this.root = node;
+            this.size = 1;
+            this.height = 0;
+            return true;
+        }
+        Node aux = findNode(name, root);
+        aux.addSubtree(aux);
+        return false;
+    }
+
+    // implementar: caso n encontre o nodo, criar um nodo e continuar o percurso
+    public Node findFirstNode (char c) {
+        for (int i = 0; i < root.subtrees.size(); i++) {
+            if (root.subtrees.get(i).name.charAt(i) == c) {
+                return root.subtrees.get(i);
+            }
+        }
+        return null;
+    }
+
+    // implementar: se não encontrar o nodo, criar um novo path que leve ao nodo.
+    public Node findNode (String ref, Node target) {
+        Node aux = null;
+        if(target.name.charAt(target.level) == ref.charAt(target.level)) {
+
+        }
+
+        return null;
     }
 
 
