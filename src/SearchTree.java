@@ -5,7 +5,6 @@ public class SearchTree {
 
     private Node root;
     private Integer size;
-    private Integer height;
 
     private class Node {
 
@@ -30,17 +29,12 @@ public class SearchTree {
     public SearchTree () {
         this.root = null;
         this.size = 0;
-        this.height = null;
     }
 
-    // implementar: após encontrar o nodo, adcionar o nome.
+    // implementar: após encontrar o nodo, adicionar o nome.
     public boolean add (String name, String meaning) {
         if (size == 0) {
-            Node node = new Node(name, meaning);
-            this.root = node;
-            this.size = 1;
-            this.height = 0;
-            return true;
+            createPath(name, root);
         }
         Node aux = findNode(name, root);
         aux.addSubtree(aux);
@@ -67,5 +61,9 @@ public class SearchTree {
         return null;
     }
 
+    // implementar: criar o caminho restante a partir do nodo entregue
+    public void createPath (String name, Node starter) {
+        
+    }
 
 }
