@@ -81,14 +81,11 @@ public class SearchTree {
         return true;
     }
 
-    // implementar: caso não encontre o nodo, criar um nodo e continuar o percurso
+    /**
+     * Returns the a root subtree node with the element asked. If there's none, it returns null.
+     */
     public Node findFirstNode (char c) {
-        for (int i = 0; i < root.subtrees.size(); i++) {
-            if (root.subtrees.get(i).name.charAt(i) == c) {
-                return root.subtrees.get(i);
-            }
-        }
-        return null;
+        return root.findChild(c);
     }
 
     /**
@@ -106,25 +103,30 @@ public class SearchTree {
         return aux;
     }
 
-    // implementar: criar o caminho restante a partir do nodo entregue
-    public void createPath (String nam, String mean,  Node starter) {
-        Node aux = starter;
+    /**
+     * Creates a path with the name given and sets a final node
+     */
+    private void createPath (String nam, String mean,  Node starter) {
+        Node aux;
         if (starter == root) {
-            for (int i = 0; i < nam.length(); i++) {
-                if (i == nam.length()-1) {
-                    Node node = new Node(nam, mean);
-                    aux.addSubtree(node);
-                    break;
-                } else {
-                    Node node = new Node (nam.charAt(i));
-                    aux.addSubtree(node);
-                    aux = node;
-                    aux.setLevel();
-                }
-            }
+            aux = starter;
         } else {
-            Node n = findNode(nam, starter);
+            aux = findNode(nam, starter);
+        }
+        // System.out.printf("%s, %s, %s", nam, mean, starter);
+        for (int i = starter.level; i < nam.length(); i++) {
+            if (i == nam.length()-1) {
+                Node node = new Node(nam, mean);
+                node.father = aux;
+                aux.addSubtree(node);
+                break;
+            } else {
+                Node node = new Node (nam.charAt(i));
+                node.father = aux;
+                aux.addSubtree(node);
+                aux = node;
+                aux.setLevel();
+            }
         }
     }
-
 }
