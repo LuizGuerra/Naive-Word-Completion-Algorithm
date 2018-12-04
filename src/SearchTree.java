@@ -34,23 +34,17 @@ public class SearchTree {
         }
 
         public void addSubtree(Node n) {
-            //System.out.println(n.toString());
             this.subtrees.add(n);
         }
 
         public void setLevel () {
-            if (this == root) {
-                this.level = 0;
-            } else {
-                Node aux = father;
-                int val = 0;
-                while (aux != null) {
-                    aux = aux.father;
-                    val++;
-                }
-                this.level = val;
+            Node aux = father;
+            int val = 0;
+            while (aux != null) {
+                aux = aux.father;
+                val++;
             }
-
+            this.level = val;
         }
 
         public Node findChild (char c) {
@@ -69,20 +63,24 @@ public class SearchTree {
 
     public SearchTree () {
         this.root = new Node (' ');
-        root.setLevel();
         this.size = 0;
+        root.level = 0;
     }
 
     /**
      * After creating a path for the node, the method will add a name and value to the node
      */
     public boolean add (String name, String meaning) {
+        name = name.toLowerCase(); // hey you
         if (size == 0 || findFirstNode(name.charAt(0)) == null) {
             createPath(name, meaning, root);
             return true;
         }
         Node aux = findNode(name, root);
-        aux.addSubtree(aux);
+        if (aux == null) {
+            return false;
+        }
+        createPath(name, meaning, aux);
         return true;
     }
 
@@ -98,32 +96,30 @@ public class SearchTree {
      */
     public Node findNode (String ref, Node target) {
         Node aux = target.findChild(ref.charAt(target.level));
-        System.out.println(aux.name + " - " + "ref");
-        if (aux == null || aux.name == null) {
+        if (aux == null) {
             return aux.father;
-        } else if ((aux.name).contains(ref)) {
-            return aux;
-        } else if (aux.subtrees != null){
-            aux = findNode(ref, aux);
         }
-        return aux;
+        for (int i = 1; i < ref.length(); i++) {
+            if (aux.findChild(ref.charAt(i)) == null) {
+                return aux;
+            }
+            aux = aux.findChild(ref.charAt(i));
+        }
+        return null;
     }
 
     /**
      * Creates a path with the name given and sets a final node
      */
     private void createPath (String nam, String mean,  Node starter) {
-        Node aux;
-        if (starter == root) {
-            aux = starter;
-        } else {
-            aux = findNode(nam, starter);
-        }
-        for (int i = starter.level; i < nam.length(); i++) {
+        Node aux = starter;
+        aux.setLevel();
+        for (int i = aux.level; i < nam.length(); i++) {
             if (i == nam.length()-1) {
                 Node node = new Node(nam, mean);
                 node.father = aux;
                 aux.addSubtree(node);
+                aux.setLevel();
                 size++;
                 break;
             } else {
@@ -137,22 +133,12 @@ public class SearchTree {
         }
     }
 
-    public Node searchWord(String name, Node target) {
-        Node res = null;
-        if (target != null) {
-            if (name.equals(target.name)) {
-                res = target;
-            } else {
-                Node aux = null;
-                int i = 0;
-                while ((aux == null) && (i < size)) {
-                    aux = searchWord(name, target);
-                    i++;
-                }
-                res = aux;
-            }
-        }
-        return res;
+    /*public ArrayList<ArrayList> searchName () {
+
+    }*/
+
+    public searchName (String word, Node target) {
+        
     }
 
     public int getSize () {

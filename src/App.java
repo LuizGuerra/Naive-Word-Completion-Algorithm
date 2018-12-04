@@ -13,7 +13,7 @@ public class App {
         }
 
         System.out.println(st.getSize());
-        //System.out.println(st.searchWord("aga", st.root));
+        System.out.println(st.searchName("aga"));
 
 
 
