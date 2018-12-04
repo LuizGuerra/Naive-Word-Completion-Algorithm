@@ -1,9 +1,10 @@
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public class SearchTree {
 
-    private Node root;
+    public Node root;
     private Integer size;
 
     private class Node {
@@ -19,7 +20,7 @@ public class SearchTree {
             this.element = n.charAt(n.length()-1);
             this.name = n;
             this.value = v;
-            this.subtrees = null;
+            this.subtrees = new ArrayList<Node>();
             this.level = null;
         }
 
@@ -28,11 +29,12 @@ public class SearchTree {
             this.element = e;
             this.name = null;
             this.value = null;
-            this.subtrees = null;
+            this.subtrees = new ArrayList<Node>();
             this.level = null;
         }
 
         public void addSubtree(Node n) {
+            //System.out.println(n.toString());
             this.subtrees.add(n);
         }
 
@@ -46,7 +48,9 @@ public class SearchTree {
                     aux = aux.father;
                     val++;
                 }
+                this.level = val;
             }
+
         }
 
         public Node findChild (char c) {
@@ -65,6 +69,7 @@ public class SearchTree {
 
     public SearchTree () {
         this.root = new Node (' ');
+        root.setLevel();
         this.size = 0;
     }
 
@@ -93,9 +98,10 @@ public class SearchTree {
      */
     public Node findNode (String ref, Node target) {
         Node aux = target.findChild(ref.charAt(target.level));
-        if (aux == null) {
+        System.out.println(aux.name + " - " + "ref");
+        if (aux == null || aux.name == null) {
             return aux.father;
-        } else if (aux.name.equals(ref)) {
+        } else if ((aux.name).contains(ref)) {
             return aux;
         } else if (aux.subtrees != null){
             aux = findNode(ref, aux);
@@ -113,12 +119,12 @@ public class SearchTree {
         } else {
             aux = findNode(nam, starter);
         }
-        // System.out.printf("%s, %s, %s", nam, mean, starter);
         for (int i = starter.level; i < nam.length(); i++) {
             if (i == nam.length()-1) {
                 Node node = new Node(nam, mean);
                 node.father = aux;
                 aux.addSubtree(node);
+                size++;
                 break;
             } else {
                 Node node = new Node (nam.charAt(i));
@@ -126,7 +132,37 @@ public class SearchTree {
                 aux.addSubtree(node);
                 aux = node;
                 aux.setLevel();
+                size++;
             }
         }
     }
+
+    public Node searchWord(String name, Node target) {
+        Node res = null;
+        if (target != null) {
+            if (name.equals(target.name)) {
+                res = target;
+            } else {
+                Node aux = null;
+                int i = 0;
+                while ((aux == null) && (i < size)) {
+                    aux = searchWord(name, target);
+                    i++;
+                }
+                res = aux;
+            }
+        }
+        return res;
+    }
+
+    public int getSize () {
+        return this.size;
+    }
+   /* @Override
+    public String toString() {
+
+
+
+        return "";
+    }*/
 }

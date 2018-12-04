@@ -12,6 +12,9 @@ public class App {
             st.add(information.get(i).get(0), information.get(i).get(1));
         }
 
+        System.out.println(st.getSize());
+        //System.out.println(st.searchWord("aga", st.root));
+
 
 
     }
