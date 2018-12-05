@@ -162,6 +162,10 @@ public class SearchTree {
         return this.lista;
     }
 
+    public void cleanList() {
+        lista.clear();
+    }
+
     public List<List<String>> searchName (String word) {
         Node aux = findNode(word, root);
         // int val = findSubtreeSize(aux);
