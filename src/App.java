@@ -55,8 +55,12 @@ public class App {
     public static void print(SearchTree st, String str) {
         try {
             List<List<String>> lista = st.searchName(str);
-            for (List<String> i : lista) {
-                System.out.printf("%s: %s\n", i.get(0), i.get(1));
+            if (lista == null) {
+                System.out.println("String inválida ou não existente na árvore! Tente novamente.");
+            } else {
+                for (List<String> i : lista) {
+                    System.out.printf("%s: %s\n", i.get(0), i.get(1));
+                }
             }
             st.cleanList();
         } catch (Exception e) {

@@ -48,7 +48,7 @@ public class SearchTree {
         }
 
         public Node findChild (char c) {
-            if (subtrees == null) {
+            if (subtrees == null || subtrees.isEmpty()) {
                 return null;
             }
             for (int i = 0; i < subtrees.size(); i++) {
@@ -168,6 +168,9 @@ public class SearchTree {
 
     public List<List<String>> searchName (String word) {
         Node aux = findNode(word, root);
+        if (aux == null) {
+            return null;
+        }
         // int val = findSubtreeSize(aux);
         return findSubtreeWords(aux);
     }
@@ -175,12 +178,4 @@ public class SearchTree {
     public int getSize () {
         return this.size;
     }
-
-   /* @Override
-    public String toString() {
-
-
-
-        return "";
-    }*/
 }
