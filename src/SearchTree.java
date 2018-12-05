@@ -151,8 +151,7 @@ public class SearchTree {
         int val = findSubtreeSize_plusOne(aux);
         int cont = 10;
         while (cont <= val) {
-            
-            cont++;
+
         }
         return null;
     }
