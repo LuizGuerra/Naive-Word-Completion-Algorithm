@@ -179,7 +179,7 @@ public class SearchTree {
     // O(n)
     public List<List<String>> searchName (String word) {
         Node aux = findNode(word, root);
-        if (aux == null) {
+        if (aux == null || aux.level != word.length()) {
             return null;
         }
         // int val = findSubtreeSize(aux);
