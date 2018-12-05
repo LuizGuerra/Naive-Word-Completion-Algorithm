@@ -24,6 +24,7 @@ public class ReadCSVFile {
 
     /**
      * Here the method reads the CSV file and return it as a 2 dimensions array.
+     * O(n)
      */
     public List<List<String>> read () {
         List<List<String>> information = new ArrayList<>();

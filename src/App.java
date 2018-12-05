@@ -46,12 +46,14 @@ public class App {
         System.out.println("Até mais! :D");
     }
 
+    // O(n)
     public static String deAccent(String str) {
         String nfdNormalizedString = Normalizer.normalize(str, Normalizer.Form.NFD);
         Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
         return pattern.matcher(nfdNormalizedString).replaceAll("");
     }
 
+    // O(n)
     public static String tryAgain (String yn) {
         Scanner input = new Scanner(System.in);
 
@@ -60,6 +62,7 @@ public class App {
         return yn;
     }
 
+    // O(n)
     public static void print(SearchTree st, String str) {
         try {
             List<List<String>> lista = st.searchName(str);

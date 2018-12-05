@@ -37,6 +37,7 @@ public class SearchTree {
             this.subtrees.add(n);
         }
 
+        // O(n)
         public void setLevel () {
             Node aux = father;
             int val = 0;
@@ -47,6 +48,7 @@ public class SearchTree {
             this.level = val;
         }
 
+        // O(n)
         public Node findChild (char c) {
             if (subtrees.isEmpty()) {
                 return null;
@@ -69,6 +71,7 @@ public class SearchTree {
 
     /**
      * After creating a path for the node, the method will add a name and value to the node
+     * O(n)
      */
     public boolean add (String name, String meaning) {
         name = name.toLowerCase(); // hey you
@@ -86,6 +89,7 @@ public class SearchTree {
 
     /**
      * Returns the a root subtree node with the element asked. If there's none, it returns null.
+     * O(n)
      */
     public Node findFirstNode (char c) {
         return root.findChild(c);
@@ -93,6 +97,7 @@ public class SearchTree {
 
     /**
      * Search for a node with the asked string, if it doesn't, it gives back the closest path for the name
+     * O(n)
      */
     public Node findNode (String ref, Node target) {
         Node aux = target.findChild(ref.charAt(target.level));
@@ -109,7 +114,8 @@ public class SearchTree {
     }
 
     /**
-     * Creates a path with the name given and sets a final node
+     * Creates a path with the name given and sets a final node.
+     * O(n), com o método setLevel encadeado fica O(n^2)
      */
     private void createPath (String nam, String mean,  Node starter) {
         Node aux = starter;
@@ -133,6 +139,7 @@ public class SearchTree {
         }
     }
 
+    // O(n log n)
     public int findSubtreeSize (Node n) {
         int val = 0;
         if (n != null) {
@@ -145,6 +152,8 @@ public class SearchTree {
     }
 
     private List<List<String>> lista = new ArrayList<>();
+
+    // O(n log n)
     public List<List<String>> findSubtreeWords (Node n) {
         if (n != null) {
             if (n.name != null) {
@@ -162,10 +171,12 @@ public class SearchTree {
         return this.lista;
     }
 
+    // O(n)
     public void cleanList() {
         lista.clear();
     }
 
+    // O(n)
     public List<List<String>> searchName (String word) {
         Node aux = findNode(word, root);
         if (aux == null) {
@@ -178,4 +189,5 @@ public class SearchTree {
     public int getSize () {
         return this.size;
     }
+
 }
