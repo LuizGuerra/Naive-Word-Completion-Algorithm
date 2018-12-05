@@ -105,7 +105,7 @@ public class SearchTree {
             }
             aux = aux.findChild(ref.charAt(i));
         }
-        return null;
+        return aux;
     }
 
     /**
@@ -133,39 +133,45 @@ public class SearchTree {
         }
     }
 
-    public int findSubtreeSize_plusOne (Node n) {
+    public int findSubtreeSize (Node n) {
         int val = 0;
-
         if (n != null) {
             val++;
             for (Node i : n.subtrees) {
-                val += findSubtreeSize_plusOne(i);
+                val += findSubtreeSize(i);
             }
         }
         return val;
     }
 
-    public List<List<String>> searchName (String word) {
-        List<List<String>> lista = new ArrayList<>();
-        Node aux = findNode(word, root);
-        int val = findSubtreeSize_plusOne(aux);
-        int cont = 10;
-        while (cont <= val) {
-
+    private List<List<String>> lista = new ArrayList<>();
+    public List<List<String>> findSubtreeWords (Node n) {
+        if (n != null) {
+            if (n.name != null) {
+                List<String> ls = new ArrayList<>();
+                ls.add(n.name);
+                ls.add(n.value);
+                lista.add(ls);
+            }
+            for (Node i : n.subtrees) {
+                findSubtreeWords(i);
+            }
+        } else {
+            return null;
         }
-        return null;
+        return this.lista;
     }
 
-    public Node sN (String word, Node target) {
-        for (Node i : target.subtrees) {
-
-        }
-        return null;
+    public List<List<String>> searchName (String word) {
+        Node aux = findNode(word, root);
+        // int val = findSubtreeSize(aux);
+        return findSubtreeWords(aux);
     }
 
     public int getSize () {
         return this.size;
     }
+
    /* @Override
     public String toString() {
 

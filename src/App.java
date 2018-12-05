@@ -12,9 +12,13 @@ public class App {
             st.add(information.get(i).get(0), information.get(i).get(1));
         }
 
-        System.out.println(st.getSize());
+        //System.out.println(st.getSize());
         //System.out.println(st.searchName("aga", st.root));
-        System.out.println(st.findSubtreeSize_plusOne(st.root)-1);
+        //System.out.println(st.findSubtreeSize(st.root)-1);
+        List<List<String>> lista = st.searchName("be");
+        for (List<String> i : lista) {
+            System.out.printf("%s: %s\n", i.get(0), i.get(1));
+        }
 
 
 
