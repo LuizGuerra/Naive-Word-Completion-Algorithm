@@ -133,12 +133,35 @@ public class SearchTree {
         }
     }
 
-    /*public ArrayList<ArrayList> searchName () {
+    public int findSubtreeSize_plusOne (Node n) {
+        int val = 0;
 
-    }*/
+        if (n != null) {
+            val++;
+            for (Node i : n.subtrees) {
+                val += findSubtreeSize_plusOne(i);
+            }
+        }
+        return val;
+    }
 
-    public searchName (String word, Node target) {
-        
+    public List<List<String>> searchName (String word) {
+        List<List<String>> lista = new ArrayList<>();
+        Node aux = findNode(word, root);
+        int val = findSubtreeSize_plusOne(aux);
+        int cont = 10;
+        while (cont <= val) {
+            
+            cont++;
+        }
+        return null;
+    }
+
+    public Node sN (String word, Node target) {
+        for (Node i : target.subtrees) {
+
+        }
+        return null;
     }
 
     public int getSize () {

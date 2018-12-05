@@ -13,7 +13,8 @@ public class App {
         }
 
         System.out.println(st.getSize());
-        System.out.println(st.searchName("aga"));
+        //System.out.println(st.searchName("aga", st.root));
+        System.out.println(st.findSubtreeSize_plusOne(st.root)-1);
 
 
 
