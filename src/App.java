@@ -30,8 +30,12 @@ public class App {
 
         // Inicia o projeto
         while (yn.equals("y")) {
-            System.out.print("Digite uma String qualquer: ");
+            System.out.print("Digite uma String qualquer entre 2 ou 3 caracteres: ");
             String qualquer = deAccent(input.nextLine().toLowerCase());
+            while (qualquer.length() < 2 || qualquer.length() > 3) {
+                System.out.print("Por favor, digite uma String qualquer entre 2 ou 3 caracteres: ");
+                qualquer = deAccent(input.nextLine().toLowerCase());
+            }
             print(st, qualquer);
 
             System.out.print("\nVocê deseja pesquisar o significado de algum nome novamente? [y/n] ");
@@ -64,13 +68,27 @@ public class App {
 
     // O(n)
     public static void print(SearchTree st, String str) {
+        Scanner input = new Scanner(System.in);
         try {
             List<List<String>> lista = st.searchName(str);
             if (lista == null) {
                 System.out.println("ERRO 01: String inválida ou não existente na árvore! Tente novamente.");
             } else {
+                System.out.println("Selecione um nome:");
                 for (List<String> i : lista) {
-                    System.out.printf("%s: %s\n", i.get(0), i.get(1));
+                    System.out.printf("%s\n", i.get(0));
+                }
+                String sss = input.nextLine();
+                System.out.println();
+                while (!isIt(sss, lista)) {
+                    System.out.println("Por favor selecione um nome da lista!");
+                    sss = input.nextLine();
+                }
+                for (List<String> i : lista) {
+                    if (i.get(0).equals(sss)) {
+                        System.out.printf("%s: %s\n", i.get(0), i.get(1));
+                        break;
+                    }
                 }
             }
             st.cleanList();
@@ -78,6 +96,15 @@ public class App {
             System.out.println("ERRO 02: String inválida ou não existente na árvore! Tente novamente.");
         }
 
+    }
+
+    public static boolean isIt (String str, List<List<String>> lista) {
+        for (List<String> s : lista) {
+            if (str.equals(s.get(0))) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
