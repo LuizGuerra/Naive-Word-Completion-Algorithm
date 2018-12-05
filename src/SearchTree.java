@@ -98,12 +98,9 @@ public class SearchTree {
         Node aux = target.findChild(ref.charAt(target.level));
         if (aux == null) {
             return aux.father;
-        }/* else if (aux.findChild(ref.charAt(1)) == null) {
-            return null;
-        }*/
+        }
         for (int i = 1; i < ref.length(); i++) {
-
-            if (aux.findChild(ref.charAt(i)) != null) {
+            if (aux.findChild(ref.charAt(i)) == null) {
                 return aux;
             }
             aux = aux.findChild(ref.charAt(i));

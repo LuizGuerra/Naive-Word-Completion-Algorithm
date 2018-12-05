@@ -64,7 +64,7 @@ public class App {
         try {
             List<List<String>> lista = st.searchName(str);
             if (lista == null) {
-                System.out.println("String inválida ou não existente na árvore! Tente novamente.");
+                System.out.println("ERRO 01: String inválida ou não existente na árvore! Tente novamente.");
             } else {
                 for (List<String> i : lista) {
                     System.out.printf("%s: %s\n", i.get(0), i.get(1));
@@ -72,7 +72,7 @@ public class App {
             }
             st.cleanList();
         } catch (Exception e) {
-            System.out.println("String inválida ou não existente na árvore! Tente novamente.");
+            System.out.println("ERRO 02: String inválida ou não existente na árvore! Tente novamente.");
         }
 
     }
