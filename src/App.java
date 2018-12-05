@@ -1,6 +1,8 @@
+import java.text.Normalizer;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class App {
     public static void main(String[] args) {
@@ -29,14 +31,14 @@ public class App {
         // Inicia o projeto
         while (yn.equals("y")) {
             System.out.print("Digite uma String qualquer: ");
-            String qualquer = input.nextLine().toLowerCase();
+            String qualquer = deAccent(input.nextLine().toLowerCase());
             print(st, qualquer);
 
             System.out.print("\nVocê deseja pesquisar o significado de algum nome novamente? [y/n] ");
             yn = input.nextLine().toLowerCase();
 
             while (!yn.equals("y") && !yn.equals("n")) {
-                yn = tryAgain(yn);
+                yn = tryAgain(yn).toLowerCase();
             }
         }
 
@@ -44,11 +46,17 @@ public class App {
         System.out.println("Até mais! :D");
     }
 
+    public static String deAccent(String str) {
+        String nfdNormalizedString = Normalizer.normalize(str, Normalizer.Form.NFD);
+        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+        return pattern.matcher(nfdNormalizedString).replaceAll("");
+    }
+
     public static String tryAgain (String yn) {
         Scanner input = new Scanner(System.in);
 
         System.out.print("Desculpa, eu não entendi, pode responder com \"y\" (Sim) ou \"n\" (Não)? Obrigado :) ");
-        yn = input.nextLine().toLowerCase();
+        yn = deAccent(input.nextLine().toLowerCase());
         return yn;
     }
 
