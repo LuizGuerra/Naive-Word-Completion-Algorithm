@@ -1,2 +1,3 @@
-# T3_Algoritmo_I
-Trabalho 3 de Algoritmos I
+# Naive Word Completion Algorithm
+
+This is a naive word completion algorithm, created as an university assignment.
